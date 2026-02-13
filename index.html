@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>La mulți ani, Mamă ❤️</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #ffd1dc, #ff9eb5, #ff6f91);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      color: #fff;
+    }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      padding: 40px;
+      border-radius: 25px;
+      box-shadow: 0 0 40px rgba(255, 255, 255, 0.4);
+      width: 450px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      text-shadow: 0 0 15px white;
+    }
+
+    .slideshow img {
+      width: 300px;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 50%;
+      box-shadow: 0 0 25px white;
+      margin: 0 auto;
+      display: block;
+    }
+
+    #messages {
+      margin-top: 15px;
+      font-size: 18px;
+      text-shadow: 0 0 10px white;
+      min-height: 24px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      background: #ff4f81;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #ff2e63;
+    }
+
+    .falling {
+      position: absolute;
+      top: -10px;
+      font-size: 20px;
+      animation: fall linear infinite;
+      opacity: 0.8;
+      z-index: 1;
+    }
+
+    @keyframes fall {
+      to { transform: translateY(110vh); }
+    }
+
+    .glow {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 70%);
+      animation: pulse 3s infinite alternate;
+      z-index: 1;
+    }
+
+    @keyframes pulse {
+      from { transform: scale(1); }
+      to { transform: scale(1.2); }
+    }
+  </style>
+</head>
+<body>
+  <div class="glow"></div>
+  <div class="container">
+    <h1>La mulți ani de Ziua Îndrăgostiților, Mamă ❤️</h1>
+
+    <div class="slideshow">
+      <img id="slide" src="poza_1.jpg" alt="Mama">
+    </div>
+
+    <p id="messages">Te iubesc, Mamă! ❤️</p>
+
+    <p>Îți mulțumesc că ești mereu sprijinul meu. Te iubesc mai mult decât pot spune în cuvinte!</p>
+    
+    <!-- Buton muzică -->
+    <button onclick="playMusic()">🎵 Pornește muzica</button>
+  </div>
+
+  <audio id="bgMusic" loop>
+    <source src="0213.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    // Slideshow poze
+    const images = [
+      "poza_1.jpg","poza_2.jpg","poza_3.jpg","poza_4.jpg","poza_5.jpg",
+      "poza_6.jpg","poza_7.jpg","poza_8.jpg","poza_9.jpg","poza_10.jpg"
+    ];
+    let index = 0;
+    const slide = document.getElementById("slide");
+    setInterval(() => {
+      index = (index + 1) % images.length;
+      slide.src = images[index];
+    }, 3000);
+
+    // Mesaje rotative
+    const messages = [
+      "Te iubesc, Mamă! ~ Aran",
+      "Ești cea mai bună mamă din lume!",
+      "Mulțumesc pentru tot sprijinul tău!",
+      "Zâmbește, meriți tot ce e mai frumos!",
+      "Îți doresc o zi plină de iubire și bucurie!"
+    ];
+    let msgIndex = 0;
+    const messageEl = document.getElementById("messages");
+    setInterval(() => {
+      msgIndex = (msgIndex + 1) % messages.length;
+      messageEl.innerText = messages[msgIndex];
+    }, 4000);
+
+    // Muzică
+    const bgMusic = document.getElementById("bgMusic");
+    function playMusic() { bgMusic.play(); }
+
+    // Funcție pentru cadere emoji
+    function createFalling(emoji) {
+      const el = document.createElement("div");
+      el.classList.add("falling");
+      el.innerText = emoji;
+      el.style.left = Math.random() * window.innerWidth + "px";
+      el.style.animationDuration = (3 + Math.random() * 5) + "s";
+      document.body.appendChild(el);
+      setTimeout(() => { el.remove(); }, 8000);
+    }
+
+    // Inimioare, îngerași și steaguri românești
+    setInterval(() => {
+      createFalling("❤️");   // inimioare
+      createFalling("👼");   // îngerași
+      createFalling("🇷🇴");  // steagul României
+    }, 400);
+  </script>
+</body>
+</html>
