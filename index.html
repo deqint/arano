@@ -60,23 +60,38 @@
       color: white;
       font-size: 16px;
       cursor: pointer;
+      transition: 0.3s;
     }
 
     button:hover {
       background: #ff2e63;
+      transform: scale(1.05);
     }
 
     .falling {
       position: absolute;
-      top: -10px;
-      font-size: 20px;
-      animation: fall linear infinite;
-      opacity: 0.8;
+      top: -50px;
+      animation: floatDown linear forwards;
+      opacity: 0;
       z-index: 1;
+      pointer-events: none;
     }
 
-    @keyframes fall {
-      to { transform: translateY(110vh); }
+    @keyframes floatDown {
+      0% {
+        transform: translateX(0) translateY(0) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.9;
+      }
+      50% {
+        transform: translateX(30px) translateY(50vh) rotate(10deg);
+      }
+      100% {
+        transform: translateX(-30px) translateY(110vh) rotate(-10deg);
+        opacity: 0;
+      }
     }
 
     .glow {
@@ -84,13 +99,13 @@
       width: 500px;
       height: 500px;
       background: radial-gradient(circle, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 70%);
-      animation: pulse 3s infinite alternate;
+      animation: pulse 4s infinite alternate;
       z-index: 1;
     }
 
     @keyframes pulse {
       from { transform: scale(1); }
-      to { transform: scale(1.2); }
+      to { transform: scale(1.15); }
     }
   </style>
 </head>
@@ -107,7 +122,6 @@
 
     <p>Îți mulțumesc că ești mereu sprijinul meu. Te iubesc mai mult decât pot spune în cuvinte!</p>
     
-    <!-- Buton muzică -->
     <button onclick="playMusic()">🎵 Pornește muzica</button>
   </div>
 
@@ -147,23 +161,25 @@
     const bgMusic = document.getElementById("bgMusic");
     function playMusic() { bgMusic.play(); }
 
-    // Funcție pentru cadere emoji
+    // Elegant floating emojis
     function createFalling(emoji) {
       const el = document.createElement("div");
       el.classList.add("falling");
       el.innerText = emoji;
       el.style.left = Math.random() * window.innerWidth + "px";
-      el.style.animationDuration = (3 + Math.random() * 5) + "s";
+      el.style.fontSize = (16 + Math.random() * 18) + "px";
+      el.style.animationDuration = (6 + Math.random() * 4) + "s";
       document.body.appendChild(el);
-      setTimeout(() => { el.remove(); }, 8000);
+      setTimeout(() => { el.remove(); }, 10000);
     }
 
-    // Inimioare, îngerași și steaguri românești
+    // More refined interval
     setInterval(() => {
-      createFalling("❤️");   // inimioare
-      createFalling("👼");   // îngerași
-      createFalling("🇷🇴");  // steagul României
-    }, 400);
+      createFalling("❤️");   
+      if (Math.random() > 0.5) {
+        createFalling("👼");
+      }
+    }, 900);
   </script>
 </body>
 </html>
